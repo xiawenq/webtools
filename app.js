@@ -14,11 +14,17 @@ server.listen(port, () => {
 
 app.use(express.static(path.join(__dirname, 'client')));
 
+// 当前用户数
 let numUsers = 0;
+// 当前用户名称列表
 let usersName = [];
+
+// 一个新的客户端连接处理流程
 wsServer.on('connection', (socket) => {
     let addedUsers = false;
-    console.log("got a new client, " + socket.id);
+    console.log("got a new connection id " + socket.id);
+
+    // 新来消息请求回调函数
     socket.on('new message', (data)=>{
         console.log(socket.username + " has new message");
         socket.broadcast.emit('new message', {
@@ -27,6 +33,7 @@ wsServer.on('connection', (socket) => {
         });
     });
 
+    // 客户端加入聊天请求回调函数
     socket.on('add user', (username)=> {
         console.log("connection, add user " + username);
 
@@ -62,18 +69,21 @@ wsServer.on('connection', (socket) => {
         console.log("add user: now client count " + usersName.length);
     });
 
+    // 客户正在输入提示回调函数
     socket.on('typing', () => {
         socket.broadcast.emit('typing', {
             username: socket.username
         });
     });
 
+    // 客户停止输入提示回调函数
     socket.on('stop typing', () => {
         socket.broadcast.emit('stop typing', {
             username: socket.username
         });
     });
 
+    // 客户断开连接提示回调函数
     socket.on('disconnect', () => {
         if (addedUsers) {
             --numUsers;

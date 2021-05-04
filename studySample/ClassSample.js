@@ -2,14 +2,14 @@
 // 对于所有的require(jsFile)来说，相当于先执行了一遍jsFile
 // 对于module.exports = a，导出类来说，var b = require()相当于C/C++的include，包含头文件，
 // 并给module.exports=a中的a在要引入的地方取了一个别名b，后续可以使用这个别名b()来创建对象，相当于用a()来创建对象
-var ClassB = require("./ClassA");
+var ClassB = require("./ClassSample");
 var objectB = new ClassB();
 objectB.setName("xwq");
 objectB.sayHello();
-// var f = require("./ClassA").func();
+// var f = require("./ClassSample").func();
 */
 
-function ClassA() {
+function ClassSample() {
     var name;
     this.setName = function (thyName) {
         name = thyName;
@@ -25,4 +25,4 @@ exports.func = function() {
     console.log("fun called");
 }
 
-module.exports = ClassA;
+module.exports = ClassSample;

@@ -1,5 +1,5 @@
 // sample 0: how to explain the word(module.exports)
-var ClassB = require("./ClassA");
+var ClassB = require("./ClassSample");
 var objectB = new ClassB();
 objectB.setName("xwq");
 objectB.sayHello();
@@ -13,3 +13,6 @@ A.pubF(10);
 console.log(A.getNum());
 // A.privateFunc(13);
 // console.log(A.getNum());
+
+var netServer = require("./netServerSample");
+var com = require("./serialServerSample");
