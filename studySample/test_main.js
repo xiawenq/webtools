@@ -16,3 +16,4 @@ console.log(A.getNum());
 
 var netServer = require("./netServerSample");
 var com = require("./serialServerSample");
+var netClient = require("./netClientSample");
